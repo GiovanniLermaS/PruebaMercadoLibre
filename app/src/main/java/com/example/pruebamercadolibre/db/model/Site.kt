@@ -1,0 +1,12 @@
+package com.example.pruebamercadolibre.db.model
+
+import androidx.room.ColumnInfo
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+
+@Entity
+data class Site(
+    @PrimaryKey @ColumnInfo(name = "default_currency_id") var defaultCurrencyIdd: String,
+    @ColumnInfo(name = "id") var id: String? = null,
+    @ColumnInfo(name = "name") var name: String? = null,
+)
