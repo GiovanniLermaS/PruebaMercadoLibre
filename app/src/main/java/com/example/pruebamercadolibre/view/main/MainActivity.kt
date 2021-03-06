@@ -4,6 +4,7 @@ import android.content.Context
 import android.os.Bundle
 import android.telephony.TelephonyManager
 import android.util.Log
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProviders
 import com.example.pruebamercadolibre.R
@@ -17,7 +18,7 @@ import java.util.*
 import javax.inject.Inject
 
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), View.OnClickListener {
 
     var appDatabase: AppDatabase? = null
         @Inject set
@@ -58,6 +59,12 @@ class MainActivity : AppCompatActivity() {
                     break
                 }
             }
+        }
+    }
+
+    override fun onClick(v: View?) {
+        if (v?.id == R.id.btContinue) {
+
         }
     }
 }

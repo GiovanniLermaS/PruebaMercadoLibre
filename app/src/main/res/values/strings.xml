@@ -1,4 +1,6 @@
 <resources>
     <string name="app_name">PruebaMercadoLibre</string>
     <string name="loading">Cargando</string>
+    <string name="continueButton">Continuar</string>
+    <string name="typeProduct">Escribe el producto a buscar</string>
 </resources>
