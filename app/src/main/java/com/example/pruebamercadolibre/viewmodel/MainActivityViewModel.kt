@@ -1,5 +1,6 @@
 package com.example.pruebamercadolibre.viewmodel
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.pruebamercadolibre.db.model.Site
@@ -16,6 +17,14 @@ class MainActivityViewModel @Inject constructor(private val mainActivityReposito
 
     private val successMain: MutableLiveData<ArrayList<Site>> = MutableLiveData()
     private val errorMain = MutableLiveData<String>()
+
+    fun getSuccessMain(): LiveData<ArrayList<Site>> {
+        return successMain
+    }
+
+    fun getErrorMain(): LiveData<String?> {
+        return errorMain
+    }
 
     fun getSites() {
         mainActivityRepository.getSites().subscribeOn(Schedulers.io())

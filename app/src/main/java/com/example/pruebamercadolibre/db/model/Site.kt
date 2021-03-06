@@ -6,7 +6,7 @@ import androidx.room.PrimaryKey
 
 @Entity
 data class Site(
-    @PrimaryKey @ColumnInfo(name = "default_currency_id") var defaultCurrencyIdd: String,
+    @PrimaryKey @ColumnInfo(name = "default_currency_id") var defaultCurrencyId: String,
     @ColumnInfo(name = "id") var id: String? = null,
     @ColumnInfo(name = "name") var name: String? = null,
 )
