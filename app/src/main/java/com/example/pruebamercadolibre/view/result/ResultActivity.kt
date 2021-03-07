@@ -7,6 +7,7 @@ import com.example.pruebamercadolibre.R
 import com.example.pruebamercadolibre.application.MyApplication
 import com.example.pruebamercadolibre.db.AppDatabase
 import com.example.pruebamercadolibre.util.ViewModelFactory
+import com.example.pruebamercadolibre.util.WORD_SEARCH
 import com.example.pruebamercadolibre.viewmodel.ResultActivityViewModel
 import javax.inject.Inject
 
@@ -18,6 +19,8 @@ class ResultActivity : AppCompatActivity() {
         @Inject set
     var resultActivityViewModel: ResultActivityViewModel? = null
 
+    val wordSearch by lazy { intent.getStringExtra(WORD_SEARCH) }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_result)
@@ -25,5 +28,6 @@ class ResultActivity : AppCompatActivity() {
 
         resultActivityViewModel =
             ViewModelProviders.of(this, viewModelFactory).get(ResultActivityViewModel::class.java)
+
     }
 }

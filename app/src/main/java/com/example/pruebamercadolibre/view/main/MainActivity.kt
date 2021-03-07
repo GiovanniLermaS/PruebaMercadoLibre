@@ -1,19 +1,25 @@
 package com.example.pruebamercadolibre.view.main
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.telephony.TelephonyManager
 import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.res.ResourcesCompat
 import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.lifecycleScope
 import com.example.pruebamercadolibre.R
 import com.example.pruebamercadolibre.application.MyApplication
 import com.example.pruebamercadolibre.db.AppDatabase
-import com.example.pruebamercadolibre.util.COP
-import com.example.pruebamercadolibre.util.ViewModelFactory
-import com.example.pruebamercadolibre.util.showProgress
+import com.example.pruebamercadolibre.db.Executor
+import com.example.pruebamercadolibre.db.model.Site
+import com.example.pruebamercadolibre.util.*
+import com.example.pruebamercadolibre.view.result.ResultActivity
 import com.example.pruebamercadolibre.viewmodel.MainActivityViewModel
+import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.coroutines.launch
 import java.util.*
 import javax.inject.Inject
 
@@ -35,8 +41,14 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
         mainActivityViewModel =
             ViewModelProviders.of(this, viewModelFactory).get(MainActivityViewModel::class.java)
-        getCurrency()
-        getSites()
+        lifecycleScope.launch {
+            if (appDatabase?.siteDao()?.getSites()?.isNullOrEmpty()!!) {
+                getCurrency()
+                getSites()
+            } else {
+                showProgress(this@MainActivity, isAlertInit = false, isShow = false)
+            }
+        }
     }
 
     private fun getCurrency() {
@@ -55,6 +67,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             for (site in listSites) {
                 if (currency?.equals(site.defaultCurrencyId)!!) {
                     Log.e("Site", site.toString())
+                    Executor.iOThread { appDatabase?.siteDao()?.setSite(site) }
                     showProgress(this, isAlertInit = false, isShow = false)
                     break
                 }
@@ -64,7 +77,27 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
     override fun onClick(v: View?) {
         if (v?.id == R.id.btContinue) {
-
+            if (etWordSearch?.text?.isEmpty()!!) {
+                etWordSearch?.requestFocus()
+                etWordSearch?.setError(
+                    getString(R.string.completeField),
+                    ResourcesCompat.getDrawable(
+                        resources,
+                        android.R.drawable.stat_notify_error,
+                        null
+                    )
+                )
+            } else {
+                lifecycleScope.launch {
+                    val sites = appDatabase?.siteDao()?.getSites() as ArrayList<Site>
+                    if (!sites.isNullOrEmpty()) {
+                        val intent = Intent(this@MainActivity, ResultActivity::class.java)
+                        intent.putExtra(WORD_SEARCH, etWordSearch.text)
+                        intent.putExtra(SITE, sites[0].id)
+                        startActivity(intent)
+                    }
+                }
+            }
         }
     }
 }

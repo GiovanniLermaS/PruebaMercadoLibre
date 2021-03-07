@@ -11,6 +11,8 @@ const val BASE_URL_RETROFIT = "https://api.mercadolibre.com"
 const val SITES = "/sites"
 const val SEARCH_BY_SITE = "/search?q="
 const val COP = "COP"
+const val WORD_SEARCH = "wordSearch"
+const val SITE = "site"
 
 var dialog: Dialog? = null
 

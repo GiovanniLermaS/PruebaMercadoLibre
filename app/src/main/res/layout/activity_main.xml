@@ -8,7 +8,7 @@
     tools:context=".view.main.MainActivity">
 
     <EditText
-        android:id="@+id/etEmail"
+        android:id="@+id/etWordSearch"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:background="@android:color/white"
@@ -35,7 +35,7 @@
         android:text="@string/continueButton"
         android:textColor="@android:color/white"
         android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="@+id/etEmail"
-        app:layout_constraintStart_toStartOf="@+id/etEmail"
-        app:layout_constraintTop_toBottomOf="@+id/etEmail" />
+        app:layout_constraintEnd_toEndOf="@+id/etWordSearch"
+        app:layout_constraintStart_toStartOf="@+id/etWordSearch"
+        app:layout_constraintTop_toBottomOf="@+id/etWordSearch" />
 </androidx.constraintlayout.widget.ConstraintLayout>

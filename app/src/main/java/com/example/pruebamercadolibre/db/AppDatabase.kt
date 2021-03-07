@@ -11,5 +11,5 @@ import com.example.pruebamercadolibre.db.model.Site
 )
 abstract class AppDatabase : RoomDatabase() {
 
-    abstract fun userDao(): SiteDao
+    abstract fun siteDao(): SiteDao
 }

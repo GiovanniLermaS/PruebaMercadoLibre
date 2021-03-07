@@ -3,4 +3,5 @@
     <string name="loading">Cargando</string>
     <string name="continueButton">Continuar</string>
     <string name="typeProduct">Escribe el producto a buscar</string>
+    <string name="completeField">Completa este campo</string>
 </resources>
