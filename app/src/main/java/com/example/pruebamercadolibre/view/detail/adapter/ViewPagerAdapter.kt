@@ -1,5 +1,6 @@
 package com.example.pruebamercadolibre.view.detail.adapter
 
+import android.app.Activity
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
@@ -11,8 +12,9 @@ import com.bumptech.glide.Glide
 import com.example.pruebamercadolibre.R
 import com.example.pruebamercadolibre.db.model.Picture
 
+
 class ViewPagerAdapter(
-    val context: Context,
+    private val activity: Activity,
     private val listPictures: ArrayList<Picture>
 ) : PagerAdapter() {
 
@@ -27,7 +29,7 @@ class ViewPagerAdapter(
     @NonNull
     override fun instantiateItem(@NonNull container: ViewGroup, position: Int): Any {
         val itemView: ImageView =
-            (context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater).inflate(
+            (activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater).inflate(
                 R.layout.view_image_detail,
                 container,
                 false
