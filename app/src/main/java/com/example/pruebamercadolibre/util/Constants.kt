@@ -6,6 +6,7 @@ import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkInfo
 import com.example.pruebamercadolibre.R
+import java.text.NumberFormat
 
 const val BASE_URL_RETROFIT = "https://api.mercadolibre.com"
 const val SITES = "/sites"
@@ -15,8 +16,11 @@ const val COP = "COP"
 const val WORD_SEARCH = "wordSearch"
 const val ID_SITE = "idSite"
 const val IDS = "ids"
+const val IDS_INTENT = "ids"
 
 var dialog: Dialog? = null
+
+var formatter: NumberFormat = NumberFormat.getCurrencyInstance()
 
 fun hasNetwork(context: Context): Boolean? {
     var isConnected: Boolean? = false
@@ -28,18 +32,18 @@ fun hasNetwork(context: Context): Boolean? {
     return isConnected
 }
 
-fun showProgress(context: Context, isAlertInit: Boolean, isShow: Boolean) {
+fun showProgress(context: Context, isAlertInit: Boolean) {
     if (isAlertInit) {
         val builder = AlertDialog.Builder(context)
         builder.setView(R.layout.progress)
         builder.setCancelable(false)
         dialog = builder.create()
     }
-    if (isShow) {
+    if (isAlertInit) {
         try {
             dialog?.show()
         } catch (e: Exception) {
-            showProgress(context, isAlertInit = true, isShow = true)
+            showProgress(context, isAlertInit = true)
         }
     } else dialog?.dismiss()
 }

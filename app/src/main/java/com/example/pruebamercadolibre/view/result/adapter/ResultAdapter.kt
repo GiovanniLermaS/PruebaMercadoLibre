@@ -1,6 +1,7 @@
 package com.example.pruebamercadolibre.view.result.adapter
 
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.TextView
@@ -10,6 +11,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.pruebamercadolibre.R
 import com.example.pruebamercadolibre.db.model.Result
+import com.example.pruebamercadolibre.util.IDS_INTENT
+import com.example.pruebamercadolibre.util.formatter
+import com.example.pruebamercadolibre.view.detail.DetailActivity
 
 
 class ResultAdapter(
@@ -42,7 +46,12 @@ class ResultAdapter(
         holder.itemView.findViewById<TextView>(R.id.tvPrincipalTitle).text =
             listSearchBySite[position].title
         holder.itemView.findViewById<TextView>(R.id.tvPrincipalPrice).text =
-            listSearchBySite[position].price.toString()
+            formatter.format(listSearchBySite[position].price)
+        holder.itemView.setOnClickListener {
+            val intent = Intent(context, DetailActivity::class.java)
+            intent.putExtra(IDS_INTENT, listSearchBySite[position].id)
+            context.startActivity(intent)
+        }
     }
 
     override fun getItemCount() = listSearchBySite?.size!!

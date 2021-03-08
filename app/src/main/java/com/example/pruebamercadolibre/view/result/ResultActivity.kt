@@ -1,6 +1,7 @@
 package com.example.pruebamercadolibre.view.result
 
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProviders
 import com.example.pruebamercadolibre.R
@@ -9,6 +10,7 @@ import com.example.pruebamercadolibre.db.AppDatabase
 import com.example.pruebamercadolibre.util.ID_SITE
 import com.example.pruebamercadolibre.util.ViewModelFactory
 import com.example.pruebamercadolibre.util.WORD_SEARCH
+import com.example.pruebamercadolibre.util.showProgress
 import com.example.pruebamercadolibre.view.result.adapter.ResultAdapter
 import com.example.pruebamercadolibre.viewmodel.ResultActivityViewModel
 import kotlinx.android.synthetic.main.activity_result.*
@@ -25,16 +27,26 @@ class ResultActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_result)
+        showProgress(this, isAlertInit = true)
         (applicationContext as MyApplication).getComponent()?.inject(this)
 
         resultActivityViewModel =
             ViewModelProviders.of(this, viewModelFactory).get(ResultActivityViewModel::class.java)
+        consumeSearchBySite()
+    }
+
+    private fun consumeSearchBySite() {
         resultActivityViewModel?.getSearchBySite(
             intent.getStringExtra(ID_SITE)!!,
             intent.getStringExtra(WORD_SEARCH)!!
         )
         resultActivityViewModel?.getSuccessResult()?.observe(this) { searchBySite ->
             rvSearchBySite.adapter = ResultAdapter(this, searchBySite.results)
+            showProgress(this, isAlertInit = false)
+        }
+        resultActivityViewModel?.getErrorResult()?.observe(this) { message ->
+            Log.e("Error consume service", message!!)
+            showProgress(this, isAlertInit = false)
         }
     }
 }

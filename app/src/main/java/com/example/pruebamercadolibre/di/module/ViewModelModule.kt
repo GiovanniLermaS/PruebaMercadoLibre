@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.example.pruebamercadolibre.di.util.ViewModelKey
 import com.example.pruebamercadolibre.util.ViewModelFactory
+import com.example.pruebamercadolibre.viewmodel.DetailActivityViewModel
 import com.example.pruebamercadolibre.viewmodel.MainActivityViewModel
 import com.example.pruebamercadolibre.viewmodel.ResultActivityViewModel
 import dagger.Binds
@@ -22,6 +23,11 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(ResultActivityViewModel::class)
     abstract fun bindResultActivityViewModel(resultActivityViewModel: ResultActivityViewModel?): ViewModel?
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(DetailActivityViewModel::class)
+    abstract fun bindDetailActivityViewModel(detailActivityViewModel: DetailActivityViewModel?): ViewModel?
 
     @Binds
     abstract fun bindViewModelFactory(factory: ViewModelFactory?): ViewModelProvider.Factory?

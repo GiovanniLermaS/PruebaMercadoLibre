@@ -36,7 +36,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        showProgress(this, isAlertInit = true, isShow = true)
+        showProgress(this, isAlertInit = true)
         (applicationContext as MyApplication).getComponent()?.inject(this)
 
         mainActivityViewModel =
@@ -46,7 +46,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                 getCurrency()
                 getSites()
             } else {
-                showProgress(this@MainActivity, isAlertInit = false, isShow = false)
+                showProgress(this@MainActivity, isAlertInit = false)
             }
         }
     }
@@ -68,10 +68,14 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                 if (currency?.equals(site.defaultCurrencyId)!!) {
                     Log.e("Site", site.toString())
                     Executor.iOThread { appDatabase?.siteDao()?.setSite(site) }
-                    showProgress(this, isAlertInit = false, isShow = false)
+                    showProgress(this, isAlertInit = false)
                     break
                 }
             }
+        }
+        mainActivityViewModel?.getErrorMain()?.observe(this) { message ->
+            Log.e("Error consume service", message!!)
+            showProgress(this, isAlertInit = false)
         }
     }
 

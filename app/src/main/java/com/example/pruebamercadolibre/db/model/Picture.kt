@@ -1,9 +1,8 @@
 package com.example.pruebamercadolibre.db.model
 
-class Result {
+class Picture {
 
     var id: String? = null
-    var title: String? = null
-    var price: Int? = null
     var thumbnail: String? = null
+    var secure_url: String? = null
 }
