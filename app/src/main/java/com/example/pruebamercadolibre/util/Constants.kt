@@ -9,10 +9,12 @@ import com.example.pruebamercadolibre.R
 
 const val BASE_URL_RETROFIT = "https://api.mercadolibre.com"
 const val SITES = "/sites"
+const val ITEMS = "/items"
 const val SEARCH_BY_SITE = "/search?q="
 const val COP = "COP"
 const val WORD_SEARCH = "wordSearch"
-const val SITE = "site"
+const val ID_SITE = "idSite"
+const val IDS = "ids"
 
 var dialog: Dialog? = null
 

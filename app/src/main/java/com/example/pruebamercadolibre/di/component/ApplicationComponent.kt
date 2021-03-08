@@ -8,6 +8,7 @@ import com.example.pruebamercadolibre.di.DatabaseInfo
 import com.example.pruebamercadolibre.di.module.ApplicationModule
 import com.example.pruebamercadolibre.di.module.DatabaseModule
 import com.example.pruebamercadolibre.di.module.RetrofitModule
+import com.example.pruebamercadolibre.view.detail.DetailActivity
 import com.example.pruebamercadolibre.view.main.MainActivity
 import com.example.pruebamercadolibre.view.result.ResultActivity
 import dagger.Component
@@ -19,6 +20,7 @@ interface ApplicationComponent {
     fun inject(myApplication: MyApplication?)
     fun inject(mainActivity: MainActivity?)
     fun inject(resultActivity: ResultActivity?)
+    fun inject(detailActivity: DetailActivity?)
 
     @get:ApplicationContext
     val context: Context?

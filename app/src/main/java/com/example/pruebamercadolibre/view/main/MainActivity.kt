@@ -92,8 +92,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                     val sites = appDatabase?.siteDao()?.getSites() as ArrayList<Site>
                     if (!sites.isNullOrEmpty()) {
                         val intent = Intent(this@MainActivity, ResultActivity::class.java)
-                        intent.putExtra(WORD_SEARCH, etWordSearch.text)
-                        intent.putExtra(SITE, sites[0].id)
+                        intent.putExtra(WORD_SEARCH, etWordSearch.text.toString())
+                        intent.putExtra(ID_SITE, sites[0].id)
                         startActivity(intent)
                     }
                 }
